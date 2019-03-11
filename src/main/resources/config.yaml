@@ -1,0 +1,8 @@
+kumuluzee:
+  datasources:
+    - jndi-name: jdbc/testdb
+      connection-url: jdbc:MySQL://localhost:3306/testdb
+      username: root
+      password: 123katze
+      pool:
+max-size: 20
