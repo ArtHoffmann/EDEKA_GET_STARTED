@@ -1,6 +1,7 @@
 package rest;
 
 import entities.User;
+import io.swagger.annotations.*;
 import jpa.JpaUserDao;
 
 import javax.annotation.PostConstruct;
@@ -12,10 +13,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@RequestScoped
 @Path("user")
+@Api
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+@RequestScoped
 public class UserResource {
 
     @Inject
@@ -25,6 +27,9 @@ public class UserResource {
     @GET
     @Path("/all")
     @Transactional
+    @ApiOperation(value = "Get user list", tags = {"users"}, notes = "Returns a list of all users.", authorizations = {
+            @Authorization(value = "application")})
+    @ApiResponses(value = {@ApiResponse(message = "List of users", code = 200, response = models.User.class)})
     public Response getResources() {
         List<User> all = jpaUserDao.findAll();
         StringBuilder builder = new StringBuilder();

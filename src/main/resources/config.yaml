@@ -1,8 +1,13 @@
 kumuluzee:
-  datasources:
-    - jndi-name: jdbc/testdb
-      connection-url: jdbc:MySQL://localhost:3306/testdb
-      username: root
-      password: 123katze
-      pool:
-max-size: 20
+  name: user-service
+  env:
+    name: dev
+  version: 1.0.0
+  server:
+    base-url: http://localhost:8080
+    http:
+      port: 8080
+  swagger:
+    enabled: true
+    ui:
+      enabled: true
