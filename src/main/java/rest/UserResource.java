@@ -1,8 +1,8 @@
 package rest;
 
-import entities.User;
+import entities.user.UserEntity;
 import io.swagger.annotations.*;
-import jpa.JpaUserDao;
+import jpa.user.JpaUserDao;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -27,7 +27,7 @@ public class UserResource {
     @Path("/all")
     @Transactional
     public Response getResources() {
-        List<User> all = jpaUserDao.findAll();
+        List<UserEntity> all = jpaUserDao.findAll();
         StringBuilder builder = new StringBuilder();
         return Response.ok(all).build();
     }
@@ -36,7 +36,7 @@ public class UserResource {
     @Path("/specificUserByQuery/{id}")
     public Response getOneUser(@PathParam("id") int id) {
         System.out.println("ID" + id);
-        User user = jpaUserDao.specificUser(id);
+        UserEntity user = jpaUserDao.specificUser(id);
         return Response.ok(user).build();
     }
 
@@ -44,7 +44,7 @@ public class UserResource {
     @Path("/readByCRUD/{id}")
     public Response readUser(@PathParam("id") int id) {
         System.out.println("ID" + id);
-        User user = jpaUserDao.read(id);
+        UserEntity user = jpaUserDao.read(id);
         return Response.ok(user).build();
     }
 
@@ -52,8 +52,8 @@ public class UserResource {
     @Path("/createUser")
     @Produces("application/json")
     @Transactional
-    public User createUser(User user) {
-        User u = new User();
+    public UserEntity createUser(UserEntity user) {
+        UserEntity u = new UserEntity();
         u.setFirstName(user.getFirstName());
         u.setLastName(user.getLastName());
         jpaUserDao.create(u);
@@ -64,8 +64,8 @@ public class UserResource {
     @Path("update/user/{id}")
     @Produces("application/json")
     @Transactional
-    public Response updateUser(@PathParam("id") int id, User user){
-        User u = jpaUserDao.read(id);
+    public Response updateUser(@PathParam("id") int id, UserEntity user){
+        UserEntity u = jpaUserDao.read(id);
         u.setLastName(user.getLastName());
         u.setFirstName(user.getFirstName());
         jpaUserDao.update(u);
@@ -77,7 +77,7 @@ public class UserResource {
     @Produces("application/json")
     @Transactional
     public Response deleteUser(@PathParam("id") int id){
-        User user = jpaUserDao.read(id);
+        UserEntity user = jpaUserDao.read(id);
         jpaUserDao.delete(user);
         return Response.ok(user).build();
     }

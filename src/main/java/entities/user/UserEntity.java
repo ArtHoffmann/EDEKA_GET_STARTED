@@ -1,11 +1,11 @@
-package entities;
+package entities.user;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = ITables.USER_TABLE)
-@NamedQuery(name = "User.findAll", query = "Select u FROM User u")
-public class User extends BaseEntity {
+@NamedQuery(name = "User.findAll", query = "Select u FROM UserEntity u")
+public class UserEntity extends BaseEntityUser {
 
     @Column(name = "firstname")
     private String firstname;

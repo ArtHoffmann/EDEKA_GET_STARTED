@@ -1,4 +1,4 @@
-package jpa;
+package jpa.user;
 
 import dao.GenericDaoInterface;
 
