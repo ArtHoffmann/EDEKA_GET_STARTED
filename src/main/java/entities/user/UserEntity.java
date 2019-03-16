@@ -1,5 +1,7 @@
 package entities.user;
 
+import entities.tables.ITables;
+
 import javax.persistence.*;
 
 @Entity

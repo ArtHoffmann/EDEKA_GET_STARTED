@@ -12,7 +12,7 @@ import javax.ws.rs.core.Application;
 
 @ApplicationPath("v1")
 //@DeclareRoles({"user"})
-@SwaggerDefinition(info = @Info(title = "Users-API", version = "v1.0.0"), host = "localhost:8080", securityDefinition =
+@SwaggerDefinition(info = @Info(title = "KumuluzEE-GET_Started-API", version = "v1.0.0"), host = "localhost:8080", securityDefinition =
 @SecurityDefinition(
         oAuth2Definitions = {
                 @OAuth2Definition(
