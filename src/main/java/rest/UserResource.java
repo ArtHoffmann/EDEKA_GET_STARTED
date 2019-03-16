@@ -33,7 +33,7 @@ public class UserResource {
     }
 
     @GET
-    @Path("/specificUser/{id}")
+    @Path("/specificUserByQuery/{id}")
     public Response getOneUser(@PathParam("id") int id) {
         System.out.println("ID" + id);
         User user = jpaUserDao.specificUser(id);
@@ -41,7 +41,7 @@ public class UserResource {
     }
 
     @GET
-    @Path("/read/{id}")
+    @Path("/readByCRUD/{id}")
     public Response readUser(@PathParam("id") int id) {
         System.out.println("ID" + id);
         User user = jpaUserDao.read(id);
@@ -49,13 +49,13 @@ public class UserResource {
     }
 
     @POST
-    @Path("/create/{firstname}/{lastname}")
+    @Path("/createUser")
     @Produces("application/json")
     @Transactional
-    public User createUser(@PathParam("firstname") String fn, @PathParam("lastname") String ln) {
+    public User createUser(User user) {
         User u = new User();
-        u.setFirstName(fn);
-        u.setLastName(ln);
+        u.setFirstName(user.getFirstName());
+        u.setLastName(user.getLastName());
         jpaUserDao.create(u);
         return u;
     }
