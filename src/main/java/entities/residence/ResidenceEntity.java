@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class ResidenceEntity extends BaseEntityResidence{
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="user_id_fk")
     private UserEntity user;
 
     @Column(name = "place")

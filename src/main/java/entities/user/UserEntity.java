@@ -1,13 +1,22 @@
 package entities.user;
 
+import entities.residence.ResidenceEntity;
 import entities.tables.ITables;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = ITables.USER_TABLE)
 @NamedQuery(name = "User.findAll", query = "Select u FROM UserEntity u")
 public class UserEntity extends BaseEntityUser {
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JoinColumn(name="residence_id")
+    private List<ResidenceEntity> residence;
 
     @Column(name = "firstname")
     private String firstname;
