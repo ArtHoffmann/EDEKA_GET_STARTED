@@ -1,16 +1,17 @@
 package jpa;
 
-import dao.GenericDao;
+import dao.GenericDaoInterface;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 
-
-public class GenericDaoJpaImpl<T, PK extends Serializable>
-        implements GenericDao<T, PK> {
+public class GenericDaoJpaImpl<T, Id extends Serializable>
+        implements GenericDaoInterface<T, Id> {
 
     protected Class<T> entityClass;
 
@@ -36,6 +37,7 @@ public class GenericDaoJpaImpl<T, PK extends Serializable>
 
 
     @Override
+    @Transactional
     public T create(T t) {
         this.entityManager.getTransaction().begin();
         if(!entityManager.contains(t)) {
@@ -47,7 +49,7 @@ public class GenericDaoJpaImpl<T, PK extends Serializable>
     }
 
     @Override
-    public T read(PK id) {
+    public T read(Id id) {
         return this.entityManager.find(entityClass, id);
     }
 
@@ -63,7 +65,9 @@ public class GenericDaoJpaImpl<T, PK extends Serializable>
 
     @Override
     public void delete(T t) {
+        entityManager.getTransaction().begin();
         t = this.entityManager.merge(t);
         this.entityManager.remove(t);
+        entityManager.getTransaction().commit();
     }
 }

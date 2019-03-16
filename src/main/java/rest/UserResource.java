@@ -4,7 +4,6 @@ import entities.User;
 import io.swagger.annotations.*;
 import jpa.JpaUserDao;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -27,9 +26,6 @@ public class UserResource {
     @GET
     @Path("/all")
     @Transactional
-    @ApiOperation(value = "Get user list", tags = {"users"}, notes = "Returns a list of all users.", authorizations = {
-            @Authorization(value = "application")})
-    @ApiResponses(value = {@ApiResponse(message = "List of users", code = 200, response = models.User.class)})
     public Response getResources() {
         List<User> all = jpaUserDao.findAll();
         StringBuilder builder = new StringBuilder();
@@ -38,10 +34,17 @@ public class UserResource {
 
     @GET
     @Path("/specificUser/{id}")
-    @Transactional
     public Response getOneUser(@PathParam("id") int id) {
         System.out.println("ID" + id);
         User user = jpaUserDao.specificUser(id);
+        return Response.ok(user).build();
+    }
+
+    @GET
+    @Path("/read/{id}")
+    public Response readUser(@PathParam("id") int id) {
+        System.out.println("ID" + id);
+        User user = jpaUserDao.read(id);
         return Response.ok(user).build();
     }
 
@@ -55,6 +58,28 @@ public class UserResource {
         u.setLastName(ln);
         jpaUserDao.create(u);
         return u;
+    }
+
+    @PUT
+    @Path("update/user/{id}")
+    @Produces("application/json")
+    @Transactional
+    public Response updateUser(@PathParam("id") int id, User user){
+        User u = jpaUserDao.read(id);
+        u.setLastName(user.getLastName());
+        u.setFirstName(user.getFirstName());
+        jpaUserDao.update(u);
+        return Response.ok(u).build();
+    }
+
+    @DELETE
+    @Path("deleteUserById/user/{id}")
+    @Produces("application/json")
+    @Transactional
+    public Response deleteUser(@PathParam("id") int id){
+        User user = jpaUserDao.read(id);
+        jpaUserDao.delete(user);
+        return Response.ok(user).build();
     }
 
 }

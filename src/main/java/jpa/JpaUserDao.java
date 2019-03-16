@@ -6,7 +6,7 @@ import javax.enterprise.context.RequestScoped;
 import java.util.List;
 
 @RequestScoped
-public class JpaUserDao extends GenericDaoJpaImpl<User, Integer>{
+public class JpaUserDao extends GenericDaoJpaImpl<User, Integer> {
 
     public List<User> findAll(){
     return this.entityManager.createNamedQuery("User.findAll", User.class).getResultList();
