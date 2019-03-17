@@ -5,12 +5,17 @@ import io.swagger.annotations.Info;
 import io.swagger.annotations.OAuth2Definition;
 import io.swagger.annotations.SecurityDefinition;
 import io.swagger.annotations.SwaggerDefinition;
+import rest.ResidenceResource;
+import rest.UserResource;
 
+import javax.enterprise.inject.Default;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
+import java.util.HashSet;
+import java.util.Set;
 
 
-@ApplicationPath("v1")
+@ApplicationPath("user")
 //@DeclareRoles({"user"})
 @SwaggerDefinition(info = @Info(title = "KumuluzEE-GET_Started-API", version = "v1.0.0"), host = "localhost:8080", securityDefinition =
 @SecurityDefinition(
@@ -41,8 +46,5 @@ import javax.ws.rs.core.Application;
 ))
 public class UserApplication extends Application {
 
-    public UserApplication() {
-
-    }
 
 }

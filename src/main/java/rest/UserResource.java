@@ -4,8 +4,13 @@ import entities.user.UserEntity;
 import io.swagger.annotations.*;
 import jpa.user.JpaUserDao;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Alternative;
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Qualifier;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -17,6 +22,8 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @RequestScoped
+@Named("userResource")
+@Default
 public class UserResource {
 
     @Inject
@@ -28,7 +35,6 @@ public class UserResource {
     @Transactional
     public Response getResources() {
         List<UserEntity> all = jpaUserDao.findAll();
-        StringBuilder builder = new StringBuilder();
         return Response.ok(all).build();
     }
 
