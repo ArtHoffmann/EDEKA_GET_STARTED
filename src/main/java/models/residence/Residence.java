@@ -1,9 +1,12 @@
 package models.residence;
 
+import models.user.User;
+
 public class Residence {
     private int place;
     private String street;
     private String address;
+    User user;
 
     public Residence() {
 
@@ -31,5 +34,13 @@ public class Residence {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

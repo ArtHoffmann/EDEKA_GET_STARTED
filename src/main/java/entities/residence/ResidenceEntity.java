@@ -45,4 +45,12 @@ public class ResidenceEntity extends BaseEntityResidence{
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
 }
