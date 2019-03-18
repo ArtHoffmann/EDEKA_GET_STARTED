@@ -19,8 +19,8 @@ public class ResidenceEntity extends BaseEntityResidence{
     private int place;
     @Column(name = "street")
     private String street;
-    @Column(name = "address")
-    private String address;
+    @Column(name = "number")
+    private String number;
 
     public int getPlace() {
         return place;
@@ -38,12 +38,12 @@ public class ResidenceEntity extends BaseEntityResidence{
         this.street = street;
     }
 
-    public String getAddress() {
-        return address;
+    public String getNumber() {
+        return number;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public UserEntity getUser() {
