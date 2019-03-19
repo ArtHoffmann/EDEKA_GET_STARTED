@@ -1,5 +1,6 @@
 package rest;
 
+import com.kumuluz.ee.cors.annotations.CrossOrigin;
 import entities.user.UserEntity;
 import io.swagger.annotations.*;
 import jpa.user.JpaUserDao;
@@ -35,7 +36,9 @@ public class UserResource {
     @Transactional
     public Response getResources() {
         List<UserEntity> all = jpaUserDao.findAll();
-        return Response.ok(all).build();
+        return Response.ok()
+                .entity(all)
+                .build();
     }
 
     @GET

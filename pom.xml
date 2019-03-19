@@ -108,6 +108,11 @@
             <artifactId>kumuluzee-swagger-ui</artifactId>
             <version>${kumuluzee-swagger.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.thetransactioncompany</groupId>
+            <artifactId>cors-filter</artifactId>
+            <version>2.6</version>
+        </dependency>
     </dependencies>
 
     <build>
